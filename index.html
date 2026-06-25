@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected Content</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #334155;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="password"]:focus {
+            border-color: #3b82f6;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+        #secret-content {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        #secret-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .logout-btn {
+            background-color: #475569;
+            margin-top: 20px;
+            padding: 8px 16px;
+            width: auto;
+            font-size: 14px;
+        }
+        .logout-btn:hover {
+            background-color: #334155;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PASSWORD SCREEN -->
+    <div id="login-screen" class="container">
+        <h2>Enter Password to View</h2>
+        <form id="password-form" onsubmit="checkPassword(event)">
+            <div class="input-group">
+                <input type="password" id="password-input" placeholder="Enter password..." required autofocus>
+            </div>
+            <button type="submit">Unlock</button>
+            <div id="error-msg" class="error-message">Incorrect password. Please try again.</div>
+        </form>
+    </div>
+
+    <!-- PROTECTED CONTENT SCREEN -->
+    <div id="secret-content">
+        <h2>🔒 Unlocked Content</h2>
+        <!-- Replace 'your-image-file.jpg' with your actual image path or URL later -->
+        <img id="secret-image" src="your-image-file.jpg" alt="Protected Content">
+        <br>
+        <button class="logout-btn" onclick="lockScreen()">Lock Screen</button>
+    </div>
+
+    <script>
+        // Set your desired password here
+        const CORRECT_PASSWORD = "change-this-to-your-password";
+
+        function checkPassword(event) {
+            event.preventDefault(); // Prevent page refresh
+            
+            const enteredPassword = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const loginScreen = document.getElementById('login-screen');
+            const secretContent = document.getElementById('secret-content');
+
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // Correct password: Hide login, show content
+                loginScreen.style.display = 'none';
+                secretContent.style.display = 'block';
+                errorMsg.style.display = 'none';
+            } else {
+                // Incorrect password: Show error and clear input
+                errorMsg.style.display = 'block';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+
+        function lockScreen() {
+            // Relock the screen and reset inputs
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('secret-content').style.display = 'none';
+            document.getElementById('password-input').value = '';
+            document.getElementById('error-msg').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
