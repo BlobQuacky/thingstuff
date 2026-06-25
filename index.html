@@ -78,7 +78,7 @@
         #secret-content {
             display: none;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1080px;
             background-color: #1e293b;
             padding: 20px;
             border-radius: 12px;
@@ -86,7 +86,7 @@
             text-align: center;
         }
         #secret-content img {
-            max-width: 100%;
+            width: 100%; /* Changed from max-width to width to force scaling */
             height: auto;
             border-radius: 8px;
             margin-top: 15px;
@@ -106,7 +106,6 @@
 </head>
 <body>
 
-    <!-- PASSWORD SCREEN -->
     <div id="login-screen" class="container">
         <h2>Enter Password to View</h2>
         <form id="password-form" onsubmit="checkPassword(event)">
@@ -118,21 +117,18 @@
         </form>
     </div>
 
-    <!-- PROTECTED CONTENT SCREEN -->
     <div id="secret-content">
         <h2>🔒 Unlocked Content</h2>
-        <!-- Replace 'your-image-file.jpg' with your actual image path or URL later -->
-        <img id="image" src="image.png" style="width: 90%; height: auto;" alt="stoof">
+        <img id="image" src="image.png" alt="stoof">
         <br>
         <button class="logout-btn" onclick="lockScreen()">Lock Screen</button>
     </div>
 
     <script>
-        // Set your desired password here
         const CORRECT_PASSWORD = "<@bc12345>";
 
         function checkPassword(event) {
-            event.preventDefault(); // Prevent page refresh
+            event.preventDefault(); 
             
             const enteredPassword = document.getElementById('password-input').value;
             const errorMsg = document.getElementById('error-msg');
@@ -140,12 +136,10 @@
             const secretContent = document.getElementById('secret-content');
 
             if (enteredPassword === CORRECT_PASSWORD) {
-                // Correct password: Hide login, show content
                 loginScreen.style.display = 'none';
                 secretContent.style.display = 'block';
                 errorMsg.style.display = 'none';
             } else {
-                // Incorrect password: Show error and clear input
                 errorMsg.style.display = 'block';
                 document.getElementById('password-input').value = '';
                 document.getElementById('password-input').focus();
@@ -153,7 +147,6 @@
         }
 
         function lockScreen() {
-            // Relock the screen and reset inputs
             document.getElementById('login-screen').style.display = 'block';
             document.getElementById('secret-content').style.display = 'none';
             document.getElementById('password-input').value = '';
