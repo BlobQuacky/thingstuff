@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protected Content</title>
+    <title>Protected</title>
     <style>
         * {
             box-sizing: border-box;
@@ -122,14 +122,14 @@
     <div id="secret-content">
         <h2>🔒 Unlocked Content</h2>
         <!-- Replace 'your-image-file.jpg' with your actual image path or URL later -->
-        <img id="image" src="image.png" alt="stoof">
+        <img id="secret-image" src="your-image-on-github.jpg" style="width: 90%; max-width: 800px; height: auto;" alt="stoof">
         <br>
         <button class="logout-btn" onclick="lockScreen()">Lock Screen</button>
     </div>
 
     <script>
         // Set your desired password here
-        const CORRECT_PASSWORD = "change-this-to-your-password";
+        const CORRECT_PASSWORD = "<@bc12345>";
 
         function checkPassword(event) {
             event.preventDefault(); // Prevent page refresh
